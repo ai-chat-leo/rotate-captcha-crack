@@ -7,6 +7,7 @@ import argparse
 # print(sys.path)
 import matplotlib.pyplot as plt
 import torch
+import cv2
 from PIL import Image
 
 from rotate_captcha_crack.common import device
@@ -27,7 +28,13 @@ if __name__ == "__main__":
         model = model.to(device=device)
         model.eval()
 
-        img = Image.open("datasets/tieba/1615096444.jpg")
+        # img = Image.open("datasets/tieba/1615096444.jpg")
+        # img = Image.open("datasets/tieba/1615096443.jpg")
+
+
+        img = Image.open("datasets/tieba/test-1111.jpg")
+
+        # img = Image.open("datasets/1.jpg")
         img_ts = process_captcha(img)
         img_ts = img_ts.to(device=device)
 
@@ -38,6 +45,19 @@ if __name__ == "__main__":
     img = img.rotate(
         -degree, resample=Image.Resampling.BILINEAR, fillcolor=(255, 255, 255)
     )  # use neg degree to recover the img
+    print(f"111 ")
     plt.figure("debug")
     plt.imshow(img)
+    print(f"22222 ")
     plt.show()
+
+    print(f"3333 ")
+    img.show()
+
+    img.save("./test-1111-1111.jpg")
+
+    # # 显示图像
+    # cv2.imshow('Original Image', img)
+    # # cv2.imshow('Rotated Image', result)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
