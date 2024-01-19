@@ -1,5 +1,10 @@
 import argparse
 
+## 单独运行的时候需要添加
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+# import sys
+# sys.path.append("../")
+# print(sys.path)
 import matplotlib.pyplot as plt
 import torch
 from PIL import Image
@@ -17,6 +22,7 @@ if __name__ == "__main__":
         model = RotNetR(train=False, cls_num=180)
         model_path = WhereIsMyModel(model).with_index(opts.index).model_dir / "best.pth"
         print(f"Use model: {model_path}")
+
         model.load_state_dict(torch.load(str(model_path)))
         model = model.to(device=device)
         model.eval()
